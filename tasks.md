@@ -15,3 +15,5 @@ Output: true
 ```
 
 The input string can contain any Unicode character and maybe have any length.
+
+bla-bla
