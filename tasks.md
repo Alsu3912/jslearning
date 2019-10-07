@@ -30,3 +30,13 @@ Output: ''
 Input: 'aaaaaaaa', 'aaaaaaa'
 Output: 'a'
 ```
+## Matrix multiplication
+Given two [matrixes](https://en.wikipedia.org/wiki/Matrix_(mathematics)). You need to return a third matrix which is a result of multiplication of the input matrixes. If sizes of the given matrixes are invalid for calculation of the multiplication, you need to throw an error about it.
+
+```javascript
+Input: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[5, 4, 1], [1, 5, 4], [0, -1, 5]]
+Output: [[5, 4, 1], [1, 5, 4], [0, -1, 5]]
+
+Input: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[5, 4, 1, 3], [1, 5, 4, -1], [0, -1, 5, 6], [1, 1, 1, 1]]
+Output: Exception
+```
