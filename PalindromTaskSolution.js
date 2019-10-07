@@ -26,11 +26,7 @@ var palindromeR = function(s) {
     return f(sArr, 0, sArr.length-1);
 }
 var f = function(arr, start, end) {
-    if (start >= end) {
-        return true;
-    } else if (arr[start] == arr[end]) {
-        return f(arr, start+1, end-1);
-    } else {
-        return false;
+    if (start >= end) {return true;
     }
+    return arr[start] == arr[end] && f(arr, start+1, end-1);
 }
