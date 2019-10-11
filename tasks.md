@@ -40,3 +40,15 @@ Output: [[5, 4, 1], [1, 5, 4], [0, -1, 5]]
 Input: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[5, 4, 1, 3], [1, 5, 4, -1], [0, -1, 5, 6], [1, 1, 1, 1]]
 Output: Exception
 ```
+## Brackets
+Given a string which consists from `(`, `)` and letters. You need to validate of the brackets correctness in the expression.
+```javascript
+Input: "((a)(b))"
+Output: true
+
+Input: ")("
+Output: false
+
+Input: ""
+Output: true
+```
