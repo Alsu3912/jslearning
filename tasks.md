@@ -52,3 +52,15 @@ Output: false
 Input: ""
 Output: true
 ```
+## Zip arrays
+Write a high-order function which will receive 2 arrays of the same type and a function wich map 2 items of the arrays to another value/object with the same type. The function should be applied to the first element of the first arrays and for the first element of the second array and so on. If one array has more elements than another, the "orphan" elements should be the same. 
+```javascript
+Input: [1, 2, 3], [1, 2, 3], a,b => a+b
+Output: [2, 4, 6]
+
+Input: [1, 5, 3, 4], [1, 2], a,b => a*b
+Output: [1, 10, 3, 4]
+
+Input: [1, 5, 3, 4], [], a,b => a-b
+Output: [1, 5, 3, 4]
+```
