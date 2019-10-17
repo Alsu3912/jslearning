@@ -1,7 +1,6 @@
 var brackets = function(yourString) {
-    var arrayFromYourString = Array.from(yourString);
     var current = 0;
-    for (let element of arrayFromYourString) {
+    for (const element of yourString) {
         if (element == "(") {
             current = current + 1;
         } else if (element == ")") {
