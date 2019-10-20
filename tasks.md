@@ -64,3 +64,16 @@ Output: [1, 10, 3, 4]
 Input: [1, 5, 3, 4], [], a,b => a-b
 Output: [1, 5, 3, 4]
 ```
+## Numbers
+Create classes `ComplexNumber` and `RealNumber` which encapsulate complex and real numbers respectively. They should be instantiated by calling `new ComplexNumber(1.4, 2)` to create a complex number `1.4+2i` and `new RealNumber(2.5)` for `2.5`. The constructor arguments should be real numbers. Also you need to implement operations `sum(another)` and `multiple(another)` which can receive a complex or a real number. To test your function, please create a list of 100 random real and complex numbers and just sum and multiply them all and log the result.
+Here and below please use strict mode in your code.
+## Celebrations of the week
+Given a list of celebrations in sorted ascending order, you need to return all of celebrations within the current week also in sorted order.
+```javascript
+Current date: "2019-10-20"
+Input: ["2019-10-02", "2019-10-14", "2019-10-19", "2019-10-20", "2019-10-25"]
+Output: ["2019-10-14", "2019-10-19", "2019-10-20"]
+
+Input: ["2019-10-02", "2019-10-03", "2019-10-08"]
+Output: []
+```
