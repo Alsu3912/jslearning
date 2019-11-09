@@ -77,3 +77,17 @@ Output: ["2019-10-14", "2019-10-19", "2019-10-20"]
 Input: ["2019-10-02", "2019-10-03", "2019-10-08"]
 Output: []
 ```
+## Intervals
+Given a list of pairs which are integers and the first number is always more than the second one. Let's assume that every pair is an interval which includes all numbers between. You need to write a function (and tests) to merge all of given intervals if it's possible. For example, `[1, 4]` can be merged with `[2, 7]` and the result should be`[1, 7]`. Assume that the start and end of an interval should be included into the interval.
+Be reasonable designing your code. You possibly should create classes / objects if it helps you to write a better code.
+```javascript
+Input: [[1, 4], [2, 6], [5, 10]]
+Output: [[1,10]]
+
+Input: [[1, 10], [2, 6], [5, 7]]
+Output: [[1, 10]]
+
+Input: [[7, 9], [1, 2], [10, 12]]
+Output: [[7, 9], [1, 2], [10, 12]]
+
+```
