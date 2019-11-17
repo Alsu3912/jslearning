@@ -4,7 +4,6 @@ var merge = function (intervals) {
     if (intervals.length === 1)
         return intervals;
     intervals.sort((a, b) => a[0] - b[0]);
-    //console.log(intervals);
     const result = [intervals[0]];
     for (let i = 1; i < intervals.length; i++) {
         const current = result[result.length - 1];
@@ -18,7 +17,4 @@ var merge = function (intervals) {
     }
     return result;
 };
-
-console.log(merge([[1, 3], [1, 5], [8, 10], [8, 9], [8, 10], [15, 18]]));
-
 module.exports = merge;
