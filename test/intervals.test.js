@@ -8,6 +8,10 @@ test('An intersection takes place', () => {
     expect(merge([[10, 12], [3, 10], [1, 2]])).toStrictEqual([[1, 2], [3, 12]]);
 });
 
+test('An intersection takes place 2', () => {
+    expect(merge([[1, 10], [2,3], [4,5]])).toStrictEqual([[1, 10]]);
+});
+
 test('Should work for empty array' , () => {
     expect(merge([])).toStrictEqual([]);
 });
