@@ -16,7 +16,6 @@ var dateCelebration = function (listOfCelebrations) {
     return currentWeekCelebrations;
 }
 
-// console.log(dateCelebration(["2019-08-15", "2019-10-12", "2019-10-21", "2019-10-25", "2019-10-27", "2019-10-28", "2019-12-30"]));
 
 ////////////////////////// another solution
 var binarySearch = function (searchArr, searchingValue) {
@@ -67,8 +66,4 @@ var findWeekRanges = function (arr) {
     var resultArrayDates = dates.slice(binarySearch(dates, firstDayOfWeek), binarySearch(dates, lastDayOfWeek));
     return toStringDate(resultArrayDates);
 };
-
-console.log(findWeekRanges(['2019-10-29', '2019-11-05', '2019-11-09', '2019-11-15']));
-console.log(findWeekRanges('adv'));
-
 module.exports = findWeekRanges;
