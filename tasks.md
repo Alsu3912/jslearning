@@ -91,3 +91,26 @@ Input: [[7, 9], [1, 2], [10, 12]]
 Output: [[7, 9], [1, 2], [10, 12]]
 
 ```
+## Code comments
+Given a valid javascript code with different types of comment: line comments `//` and `/* ... */`. You need to remove all comments from the source such that the code should be still compillable. Note that, there is no restriction on the comments:
+they might be in a single line, several line etc.
+```javascript
+Input: 
+"/* 
+ * This is a funcy method 
+ */
+fun doFun() {
+  print("have a fun") // It's not so funcy, I know :(
+}"
+Output:
+"
+fun doFun() {
+  print("have a fun")
+}"
+Input: 
+"
+/* It's just a comment */
+"
+Output:
+""
+```
