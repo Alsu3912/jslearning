@@ -1,5 +1,5 @@
 module.exports = commentRemover;
-
+ 
 function commentRemover(code) {
     var firstChange = quatation(code, "'", "<", ">");
     var secondChange = quatation(firstChange, '"', '<', '>');
