@@ -76,7 +76,7 @@ test("18. A comment mark /* after a quatation, it is a comment", () => {
 test("19. Mixed comments in the sample", () => {
     let actual = `
     // Hi! It's a sample
-    fun doFun() { /* It's a stupid comment
+    fun doFun() { /* It's a stupid comment */
         var a = 1/0; // Should be Nan
         println("// It's just text, so it should be in output");
     }
