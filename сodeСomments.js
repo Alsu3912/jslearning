@@ -1,8 +1,8 @@
 module.exports = commentRemover;
  
 function commentRemover(code) {
-    var firstChange = quatation(code, "'", "<", ">");
-    var secondChange = quatation(firstChange, '"', '<', '>');
+    var firstChange = quotation(code, "'", "<", ">");
+    var secondChange = quotation(firstChange, '"', '<', '>');
     var re = /\/\/(?!.*>).*|\/\*(?!.*>)[^]*?\*\/|\/\*(?!.*>)[^]*?$/g;
     var clearedСode = secondChange.replace(re, "");
     var reBack = /<|>/g
@@ -18,7 +18,7 @@ class JustString {
     }
 }
 
-function quatation(text, typeOfQuotationMark, openingMark, closingMark) {
+function quotation(text, typeOfQuotationMark, openingMark, closingMark) {
     var mutableStr = new JustString(text);
     var current = 0;
     for (var i = 0; i <= mutableStr.str.length; i++) {
