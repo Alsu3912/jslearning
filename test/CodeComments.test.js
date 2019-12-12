@@ -72,3 +72,20 @@ test("17. A comment mark // after a quatation, it is a comment", () => {
 test("18. A comment mark /* after a quatation, it is a comment", () => {
      expect(commentRemover("fun doFun() {\nprint('have a fun') /*comment\n}")).toStrictEqual("fun doFun() {\nprint('have a fun') ");
 });
+
+test("19. Mixed comments in the sample", () => {
+    let actual = `
+    // Hi! It's a sample
+    fun doFun() { /* It's a stupid comment
+        var a = 1/0; // Should be Nan
+        println("// It's just text, so it should be in output");
+    }
+    `
+    let expected = `
+    fun doFun() { 
+        var a = 1/0; 
+        println("// It's just text, so it should be in output");
+    }
+    `
+    expect(commentRemover(actual)).toStrictEqual(expected);
+});
