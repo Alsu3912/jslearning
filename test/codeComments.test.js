@@ -84,7 +84,7 @@ test("19. Mixed comments in the sample", () => {
     let expected = `
     fun doFun() { 
         var a = 1/0; 
-        println("// It's just text, so it should be in output");
+        println('// It's just text, so it should be in output');
     }
     `
     expect(commentRemover(actual)).toStrictEqual(expected);
