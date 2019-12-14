@@ -9,27 +9,22 @@ function commentRemover(code) {
     return clearedСode.replace(reBack, "'");
 }
 
-class JustString {
-    constructor(str) {
-        this.str = str;
-    }
-    replaceAt(index, replacement) {
-        return this.str.substring(0, index) + replacement + this.str.substring(index + replacement.length);
-    }
+function replaceAt(text, index, replacement) {
+    return text.substring(0, index) + replacement + text.substring(index + replacement.length);
 }
 
 function quotation(text, typeOfQuotationMark, openingMark, closingMark) {
-    var mutableStr = new JustString(text);
+    var mutableStr = text;
     var current = 0;
-    for (var i = 0; i <= mutableStr.str.length; i++) {
-        if (mutableStr.str.charAt(i) == typeOfQuotationMark) {
+    for (var i = 0; i <= mutableStr.length; i++) {
+        if (mutableStr.charAt(i) == typeOfQuotationMark) {
             current = current + 1;
             if (current % 2 == 1) {
-                mutableStr.str = mutableStr.replaceAt(i, openingMark);
+                mutableStr = replaceAt(mutableStr, i, openingMark);
             } else {
-                mutableStr.str = mutableStr.replaceAt(i, closingMark);
+                mutableStr = replaceAt(mutableStr, i, closingMark);
             }
         }
     }
-    return mutableStr.str;
+    return mutableStr;
 }
