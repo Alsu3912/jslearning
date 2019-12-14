@@ -114,3 +114,5 @@ Input:
 Output:
 ""
 ```
+## Forecast
+You need to write an application which will provide a forecast for your location. You can obtain your geolocation by `https://ipgeolocation.io/` or similar resource. `https://openweathermap.org/api` or similar resources might provide you information about forecast. All requests should be async, the output should consist temperature (min/max), wind speed, pressure and humidity.
