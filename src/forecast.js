@@ -1,10 +1,20 @@
-// module.exports = getForecastAlsu;
+module.exports = getForecast;
 const fetch = require('node-fetch');
 
 class FetchResult {
     constructor(success, fail) {
         this.success = success;
         this.fail = fail;
+    }
+}
+
+class DailyForecast {
+    constructor(temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
+        this.temperatureMin = temperatureMin;
+        this.temperatureMax = temperatureMax;
+        this.windSpeed = windSpeed;
+        this.pressure = pressure;
+        this.humidity = humidity;
     }
 }
 
@@ -27,7 +37,13 @@ async function getForecast(myFetchFunction) {
         if (forecastResponse.success == null) {
             return console.log(forecastResponse.fail);
         }
-        let forecast = forecastResponse["success"]["list"][0];
+        let forecastToday = forecastResponse["success"]["list"][0];
+        let temperatureMin = forecastToday.main.temp_min;
+        let temperatureMax = forecastToday.main.temp_max;
+        let windSpeed = forecastToday.wind.speed;
+        let pressure = forecastToday.main.pressure;
+        let humidity = forecastToday.main.humidity;
+        let forecast = new DailyForecast(temperatureMin, temperatureMax, windSpeed, pressure, humidity);
         return console.log(forecast);
 }
 getForecast(myFuckingFetch);
