@@ -1,4 +1,3 @@
-module.exports = getForecast;
 const fetch = require('node-fetch');
 
 class FetchResult {
@@ -29,13 +28,13 @@ async function getForecast(myFetchFunction) {
         const geopositionUrl = `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`;
         let geopositionResponse = await myFetchFunction(geopositionUrl);
         if (geopositionResponse.success == null) {
-            return console.log(geopositionResponse.fail);
+            return geopositionResponse.fail;
         }
         let cityID = geopositionResponse.success.location.geoname_id;
         const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityID}&APPID=4a810a5579889c847679509b27b543bf&units=metric`;
         let forecastResponse = await myFetchFunction(forecastUrl);
         if (forecastResponse.success == null) {
-            return console.log(forecastResponse.fail);
+            return forecastResponse.fail;
         }
         let forecastToday = forecastResponse["success"]["list"][0];
         let temperatureMin = forecastToday.main.temp_min;
@@ -44,6 +43,9 @@ async function getForecast(myFetchFunction) {
         let pressure = forecastToday.main.pressure;
         let humidity = forecastToday.main.humidity;
         let forecast = new DailyForecast(temperatureMin, temperatureMax, windSpeed, pressure, humidity);
-        return console.log(forecast);
+        return forecast;
 }
-getForecast(myFuckingFetch);
+
+module.exports.getForecast = getForecast;
+module.exports.FetchResult = FetchResult;
+module.exports.DailyForecast = DailyForecast;
