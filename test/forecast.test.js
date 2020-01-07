@@ -3,67 +3,42 @@ const FetchResult = require('../src/forecast').FetchResult;
 const DailyForecast = require('../src/forecast').DailyForecast;
 
 test('Everithing ok => we are getting DailyForecast', async () => {
-    const forecast = await getForecast(testFunc);
+    const forecast = await getForecast(allCasesFunction(new FetchResult(correctGeo, null),
+        new FetchResult(correctForecast, null)));
     const correctResult = new DailyForecast(3.75, 4.11, 3.42, 1033, 89);
     expect(forecast).toEqual(correctResult);
 })
 
 test('We caught an error in the first url', async () => {
-    const forecast = await getForecast(testFunc2);
-    const errorString = 'request to first url failed, reason: getaddrinfo ENOTFOUND';
-    expect(forecast).toEqual(errorString);
+    const firstErrorString = 'request to first url failed, reason: getaddrinfo ENOTFOUND';
+    const secondErrorString = 'request to first url failed, reason: getaddrinfo ENOTFOUND';
+    const forecast = await getForecast(allCasesFunction(new FetchResult(null, firstErrorString), 
+        new FetchResult(null, secondErrorString)));
+    const errorResult = new FetchResult(null, firstErrorString);
+    expect(forecast).toEqual(errorResult);
 })
 
 test('We caught an error in the second url', async () => {
-    const forecast = await getForecast(testFunc3);
-    const errorString = 'request to second url failed, reason: getaddrinfo ENOTFOUND';
-    expect(forecast).toEqual(errorString);
+    const secondErrorString = 'request to first url failed, reason: getaddrinfo ENOTFOUND';
+    const forecast = await getForecast(allCasesFunction(new FetchResult(correctGeo, null), 
+        new FetchResult(null, secondErrorString)));
+    const errorResult = new FetchResult(null, secondErrorString);
+    expect(forecast).toEqual(errorResult);
 })
 
-
-const testFunc = async function (url) {
-    return new Promise((resolve, reject) => {
-        if (url == `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`) {
-            let geo = new FetchResult(correctGeo, null);
-            resolve(geo);
-        } else if (url == `http://api.openweathermap.org/data/2.5/forecast?id=2911522&APPID=4a810a5579889c847679509b27b543bf&units=metric`) {
-            let forecast1 = new FetchResult(correctForecast, null);
-            resolve(forecast1);
-        } else {
-            let errorStuff = new FetchResult(null, 'request to some url failed, reason: getaddrinfo ENOTFOUND');
-            resolve(errorStuff);
-        }
-    });
+const allCasesFunction = function (firstFetchResult, secondFetchResult) {
+    return async function (url) {
+        return new Promise((resolve, reject) => {
+            if (url == `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`) {
+                resolve(firstFetchResult);
+            } else if (url == `http://api.openweathermap.org/data/2.5/forecast?id=2911522&APPID=4a810a5579889c847679509b27b543bf&units=metric`) {
+                resolve(secondFetchResult);
+            } else {
+                throw new Error('impossible scenario');
+            }
+        });
+    }
 }
-const testFunc2 = async function (url) {
-    return new Promise((resolve, reject) => {
-        if (url == `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`) {
-            let errorStuff = new FetchResult(null, 'request to first url failed, reason: getaddrinfo ENOTFOUND');
-            resolve(errorStuff);
-        } else if (url == `http://api.openweathermap.org/data/2.5/forecast?id=2911522&APPID=4a810a5579889c847679509b27b543bf&units=metric`) {
-            let errorStuff = new FetchResult(null, 'request to second url failed, reason: getaddrinfo ENOTFOUND');
-            resolve(errorStuff);
-        } else {
-            let errorStuff = new FetchResult(null, 'bla-bla');
-            resolve(errorStuff);
-        }
-    });
-}
-const testFunc3 = async function (url) {
-    return new Promise((resolve, reject) => {
-        if (url == `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`) {
-            let geo = new FetchResult(correctGeo, null);
-            resolve(geo);
-        } else if (url == `http://api.openweathermap.org/data/2.5/forecast?id=2911522&APPID=4a810a5579889c847679509b27b543bf&units=metric`) {
-            let errorStuff = new FetchResult(null, 'request to second url failed, reason: getaddrinfo ENOTFOUND');
-            resolve(errorStuff);
-        } else {
-            let errorStuff = new FetchResult(null, 'bla-bla');
-            resolve(errorStuff);
-        }
-    });
-}
-
 const correctGeo = {
     ip: '158.181.78.5',
     type: 'ipv4',
