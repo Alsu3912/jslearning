@@ -2,6 +2,46 @@ const getForecast = require('../src/forecast').getForecast;
 const FetchResult = require('../src/forecast').FetchResult;
 const DailyForecast = require('../src/forecast').DailyForecast;
 
+test ('We send a null as a parameter to getForecast', async () => {
+    let error = new TypeError('myFetchFunction is not a function');
+    async function invoke() {
+        return await getForecast(null);
+    }
+    await expect(invoke()).rejects.toThrow(error);
+})
+
+test ('We send an undefined as a parameter to getForecast', async () => {
+    let error = new TypeError('myFetchFunction is not a function');
+    async function invoke() {
+        return await getForecast(undefined);
+    }
+    await expect(invoke()).rejects.toThrow(error);
+})
+
+test ('We send a number as a parameter to getForecast', async () => {
+    let error = new TypeError('myFetchFunction is not a function');
+    async function invoke() {
+        return await getForecast(42);
+    }
+    await expect(invoke()).rejects.toThrow(error);
+})
+
+test ('We send a text as a parameter to getForecast', async () => {
+    let error = new TypeError('myFetchFunction is not a function');
+    async function invoke() {
+        return await getForecast('ftch');
+    }
+    await expect(invoke()).rejects.toThrow(error);
+})
+
+test ('We send nothing as a parameter to getForecast', async () => {
+    let error = new TypeError('myFetchFunction is not a function');
+    async function invoke() {
+        return await getForecast();
+    }
+    await expect(invoke()).rejects.toThrow(error);
+})
+
 test('Everithing ok => we are getting DailyForecast', async () => {
     const forecast = await getForecast(allCasesFunction(new FetchResult(correctGeo, null),
         new FetchResult(correctForecast, null)));
