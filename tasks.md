@@ -114,5 +114,9 @@ Input:
 Output:
 ""
 ```
+
 ## Forecast
 You need to write an application which will provide a forecast for your location. You can obtain your geolocation by [ipgeolocation](https://ipgeolocation.io/) or similar resource. [openweathermap](https://openweathermap.org/api) or similar resources might provide you information about forecast. All requests should be async, the output should consist temperature (min/max), wind speed, pressure and humidity.
+
+## Forecast page
+Build a web page with weather forecast using your prevoius code as a library. The page should show you a data when you open it and there should be a button to refresh the forecast. Feel free to choose the design but please follow best practices of the building html pages.  
