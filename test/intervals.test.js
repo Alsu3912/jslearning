@@ -1,4 +1,4 @@
-const merge = require("../intervals");
+const merge = require("../src/intervals");
 
 test('No intersection', () => {
     expect(merge([[0, 1], [3, 15], [75, 90]])).toStrictEqual([[0, 1], [3, 15], [75, 90]]);

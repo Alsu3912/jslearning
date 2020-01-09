@@ -1,4 +1,4 @@
-const commentRemover = require("../codeComments");
+const commentRemover = require("../src/codeComments");
  
 test("1. There are no comments in text of code", () => {
     expect(commentRemover("fun doFun() {\n print('have a fun')\n }")).toStrictEqual("fun doFun() {\n print('have a fun')\n }");

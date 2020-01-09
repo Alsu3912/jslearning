@@ -1,4 +1,4 @@
-const findWeekRanges = require('../dateCelebration');
+const findWeekRanges = require('../src/dateCelebration');
 
 //getting dates for the test - the test case depends on current date
 var curr = new Date();
