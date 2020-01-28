@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <script src="forecast.js"></script>
+    <script src="forecast_main.js"></script>
 </head>
 
 <body>
@@ -139,7 +139,7 @@
     </div>
     <script>
         htmlFillingIn = () => {
-            getForecast(httpFetcher)
+            EntryPoint.getForecast(EntryPoint.httpFetcher)
                 .then(e => {
                     document.getElementById('city').innerHTML = e.city;
                     document.getElementById('temperatureMin').innerHTML = e.temperatureMin;

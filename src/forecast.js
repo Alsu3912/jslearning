@@ -8,7 +8,8 @@ class FetchResult {
 }
 
 class DailyForecast {
-    constructor(temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
+    constructor(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
+        this.city = city;
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
         this.windSpeed = windSpeed;
@@ -37,15 +38,17 @@ async function getForecast(myFetchFunction) {
         return forecastResponse;
     }
     let forecastToday = forecastResponse["success"]["list"][0];
+    let city = forecastResponse["success"]["city"]["name"];
     let temperatureMin = forecastToday.main.temp_min;
     let temperatureMax = forecastToday.main.temp_max;
     let windSpeed = forecastToday.wind.speed;
     let pressure = forecastToday.main.pressure;
     let humidity = forecastToday.main.humidity;
-    let forecast = new DailyForecast(temperatureMin, temperatureMax, windSpeed, pressure, humidity);
+    let forecast = new DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity);
     return forecast;
 }
 
 module.exports.getForecast = getForecast;
+module.exports.httpFetcher = httpFetcher;
 module.exports.FetchResult = FetchResult;
 module.exports.DailyForecast = DailyForecast;
