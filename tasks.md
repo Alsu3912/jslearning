@@ -120,3 +120,6 @@ You need to write an application which will provide a forecast for your location
 
 ## Forecast page
 Build a web page with weather forecast using your prevoius code as a library. The page should show you a data when you open it and there should be a button to refresh the forecast. Feel free to choose the design but please follow best practices of the building html pages.  
+
+## Forecast page => React.js
+You should use react to recreate the same page for the forecast. Note that, React has a good documentation and you can play with hello world application first. Carefully read the documentation and rewrite your UI part using this tool.
