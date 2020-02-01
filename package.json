@@ -2,18 +2,21 @@
   "name": "jslearning",
   "version": "1.0.0",
   "description": "",
-  "main": "dateCelebration.js",
+  "private": true,
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "jest & webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "node-fetch": "^2.6.0"

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forecast</title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <script src="forecast_main.js"></script>
+</head>
+
+<body>
+    <div class="section">
+        <div class="covered-img">
+            <img class="top" src="img/top.png" alt="Daily forecast">
+            <h1 class="first-header"><span>Daily forecast</span></h1>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="header">Current weather in <span id="city"></span></h2>
+        <div id="circularG">
+            <div id="circularG_1"></div>
+            <div id="circularG_2"></div>
+            <div id="circularG_3"></div>
+            <div id="circularG_4"></div>
+            <div id="circularG_5"></div>
+            <div id="circularG_6"></div>
+            <div id="circularG_7"></div>
+            <div id="circularG_8"></div>
+        </div>
+        <div class="main">
+            <div class="col">
+                <img src="img/temperatureMin.png" alt="Temperature minimum">
+                <p>Temperature minimum</p>
+                <div id="tMin" class="inline">
+                    <p id="temperatureMin"></p><span> &#8451</span>
+                </div>
+            </div>
+            <div class="col">
+                <img src="img/temperetureMax.png" alt="Temperature maximum">
+                <p>Temperature maximum</p>
+                <div id="tMax" class="inline">
+                    <p id="temperatureMax"></p>
+                    <span>&#8451</span>
+                </div>
+            </div>
+            <div class="col">
+                <img src="img/windSpeed.png" alt="Wind speed">
+                <p>Wind speed</p>
+                <div id="wSpeed" class="inline">
+                    <p id="windSpeed"></p>
+                    <span>m/s</span>
+                </div>
+            </div>
+            <div class="col">
+                <img src="img/pressure.png" alt="Pressure">
+                <p>Pressure</p>
+                <div id="press" class="inline">
+                    <p id="pressure"></p>
+                    <span>hPa</span>
+                </div>
+            </div>
+            <div class="col">
+                <img src="img/humidity.png" alt="Humidity">
+                <p>Humidity</p>
+                <div id="humid" class="inline">
+                    <p id="humidity"></p>
+                    <span>%</span>
+                </div>
+            </div>
+        </div>
+        <button id="fetchForecastBtn" class="btn">Refresh</button>
+        <script>
+            fetchForecastBtn.onclick = function () {
+                addClass = (id, className) => {
+                    document.getElementById(id).classList.add(className);
+                }
+                removeClass = (id, className) => {
+                    document.getElementById(id).classList.remove(className);
+                }
+                styleDisplay = (id, displayType) => {
+                    document.getElementById(id).style.display = displayType;
+                }
+                styleDisplay("tMin", "none");
+                styleDisplay("tMax", "none");
+                styleDisplay("wSpeed", "none");
+                styleDisplay("press", "none");
+                styleDisplay("humid", "none");
+                addClass("circularG_1", "circularG");
+                addClass("circularG_2", "circularG");
+                addClass("circularG_3", "circularG");
+                addClass("circularG_4", "circularG");
+                addClass("circularG_5", "circularG");
+                addClass("circularG_6", "circularG");
+                addClass("circularG_7", "circularG");
+                addClass("circularG_8", "circularG");
+                setTimeout(() => {
+                    htmlFillingIn();
+                    removeClass("circularG_1", "circularG");
+                    removeClass("circularG_2", "circularG");
+                    removeClass("circularG_3", "circularG");
+                    removeClass("circularG_4", "circularG");
+                    removeClass("circularG_5", "circularG");
+                    removeClass("circularG_6", "circularG");
+                    removeClass("circularG_7", "circularG");
+                    removeClass("circularG_8", "circularG");
+                    styleDisplay("tMin", "block");
+                    styleDisplay("tMax", "block");
+                    styleDisplay("wSpeed", "block");
+                    styleDisplay("press", "block");
+                    styleDisplay("humid", "block");
+                }, 1000);
+
+            }
+        </script>
+    </div>
+
+    <div class="video-subscribe">
+        <div class="line"></div>
+        <h2 class="header">Do you want to receive weather forecast by e-mail?</h2>
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        <div class="form">
+            <p class="form-header">Enter your subcsription details</p>
+            <form action="#">
+                <input type="Your name" placeholder="Your name">
+                <input type="Your city" placeholder="Your city">
+                <input type="Your e-mail" placeholder="Your e-mail">
+                <button class="btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        htmlFillingIn = () => {
+            EntryPoint.getForecast(EntryPoint.httpFetcher)
+                .then(e => {
+                    document.getElementById('city').innerHTML = e.city;
+                    document.getElementById('temperatureMin').innerHTML = e.temperatureMin;
+                    document.getElementById('temperatureMax').innerHTML = e.temperatureMax;
+                    document.getElementById('windSpeed').innerHTML = e.windSpeed;
+                    document.getElementById('pressure').innerHTML = e.pressure;
+                    document.getElementById('humidity').innerHTML = e.humidity;
+                });
+        };
+        htmlFillingIn();
+    </script>
+</body>
+
+</html>
