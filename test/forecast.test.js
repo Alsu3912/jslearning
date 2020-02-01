@@ -45,7 +45,7 @@ test ('We send nothing as a parameter to getForecast', async () => {
 test('Everithing ok => we are getting DailyForecast', async () => {
     const forecast = await getForecast(allCasesFunction(new FetchResult(correctGeo, null),
         new FetchResult(correctForecast, null)));
-    const correctResult = new DailyForecast(3.75, 4.11, 3.42, 1033, 89);
+    const correctResult = new DailyForecast("Halle", 3.75, 4.11, 3.42, 1033, 89);
     expect(forecast).toEqual(correctResult);
 })
 
@@ -134,5 +134,17 @@ const correctForecast = {
             wind: { speed: 3.42, deg: 239 },
             sys: { pod: 'n' },
             dt_txt: '2020-01-05 21:00:00'
-        }]
+        }],
+        city: {
+            id: 2911522,
+            name: "Halle",
+            coord: {
+                lat: 51.5,
+                lon: 12
+            },
+            country: "DE",
+            timezone: 3600,
+            sunrise: 1580539882,
+            sunset: 1580572770
+        }
 }
