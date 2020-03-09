@@ -281,3 +281,7 @@ body {
 .inline p {
     display: inline-block;
 }
+
+.block {
+	height: 20px;
+}
