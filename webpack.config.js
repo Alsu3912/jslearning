@@ -4,10 +4,7 @@ module.exports = {
   entry: ["babel-polyfill", "./src/react.js"],
   mode: "development",
   output: {
-    filename: "./forecast_main.js",
-    // path: path.resolve(__dirname, 'public'),
-    //libraryTarget: 'var',
-    //library: 'EntryPoint'
+    filename: "./forecast_main.js"
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
