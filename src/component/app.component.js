@@ -54,7 +54,7 @@ class CoveredIMG extends Component {
 
 class Header extends Component {
     render() {
-        return <h2 className="header">Current weather in <span id="city">{this.props.result}</span></h2>
+        return <h2 className="header">Current weather in <span>{this.props.result}</span></h2>
     }
 }
 
@@ -101,6 +101,6 @@ class Refresh extends Component {
     }
 
     render() {
-        return <button id="fetchForecastBtn" className="btn" onClick={this.handleClick}>Refresh</button>
+        return <button className="btn" onClick={this.handleClick}>Refresh</button>
     }
 }
