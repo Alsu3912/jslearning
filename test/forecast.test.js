@@ -46,7 +46,7 @@ test('Everithing ok => we are getting DailyForecast', async () => {
     const forecast = await getForecast(allCasesFunction(new FetchResult(correctGeo, null),
         new FetchResult(correctForecast, null)));
     const correctResult = new DailyForecast("Halle", 3.75, 4.11, 3.42, 1033, 89);
-    expect(forecast).toEqual(correctResult);
+    expect(forecast).toEqual(correctResult + "1");
 })
 
 test('We caught an error in the first url', async () => {
