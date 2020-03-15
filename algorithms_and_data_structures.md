@@ -5,4 +5,4 @@ up and make pull request with solutions. Note that the task will be considered a
 ## Linked list
 You need to learn what linked list is. You can use sources like [that](https://humanwhocodes.com/blog/2019/01/computer-science-in-javascript-linked-list/)
 ### Task:
-Implement a `LinkedList` class with operations `add(l)`, `remove(l)`, `get(l)`, `size()`. Try to be efficient and reasonable.
+Implement a `LinkedList` class with operations `add(element)`, `remove(element)`, `get(index)`, `size()`. Try to be efficient and reasonable.
