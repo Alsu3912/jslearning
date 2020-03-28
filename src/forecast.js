@@ -1,14 +1,44 @@
-const fetch = require('node-fetch');
-
-class FetchResult {
-    constructor(success, fail) {
-        this.success = success;
-        this.fail = fail;
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-}
-
-class DailyForecast {
-    constructor(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
+};
+exports.__esModule = true;
+var node_fetch_1 = require("node-fetch");
+var DailyForecast = /** @class */ (function () {
+    function DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
         this.city = city;
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
@@ -16,39 +46,52 @@ class DailyForecast {
         this.pressure = pressure;
         this.humidity = humidity;
     }
-}
-
+    return DailyForecast;
+}());
 function httpFetcher(url) {
-    return fetch(url)
-        .then(response => response.json())
-        .then(r => new FetchResult(r, null))
-        .catch(err => new FetchResult(null, err.message))
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, node_fetch_1["default"](url, undefined)
+                    .then(function (response) { return response.json(); })["catch"](function (err) { return err.message; })];
+        });
+    });
 }
-
-async function getForecast(myFetchFunction) {
-    const geopositionUrl = `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`;
-    let geopositionResponse = await myFetchFunction(geopositionUrl);
-    if (geopositionResponse.success == null) {
-        return geopositionResponse;
-    }
-    let cityID = geopositionResponse.success.location.geoname_id;
-    const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityID}&APPID=4a810a5579889c847679509b27b543bf&units=metric`;
-    let forecastResponse = await myFetchFunction(forecastUrl);
-    if (forecastResponse.success == null) {
-        return forecastResponse;
-    }
-    let forecastToday = forecastResponse["success"]["list"][0];
-    let city = forecastResponse["success"]["city"]["name"];
-    let temperatureMin = forecastToday.main.temp_min;
-    let temperatureMax = forecastToday.main.temp_max;
-    let windSpeed = forecastToday.wind.speed;
-    let pressure = forecastToday.main.pressure;
-    let humidity = forecastToday.main.humidity;
-    let forecast = new DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity);
-    return forecast;
+function getForecast(myFetchFunction) {
+    return __awaiter(this, void 0, void 0, function () {
+        var geopositionUrl, geopositionResponse, geoposition, cityID, forecastUrl, forecastResponse, forecast, forecastToday, city, temperatureMin, temperatureMax, windSpeed, pressure, humidity, outputForecast;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    geopositionUrl = "http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901";
+                    return [4 /*yield*/, myFetchFunction(geopositionUrl)];
+                case 1:
+                    geopositionResponse = _a.sent();
+                    if (typeof geopositionResponse === 'string') {
+                        return [2 /*return*/, geopositionResponse];
+                    }
+                    geoposition = geopositionResponse;
+                    cityID = geoposition.location.geoname_id;
+                    forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&APPID=4a810a5579889c847679509b27b543bf&units=metric";
+                    return [4 /*yield*/, myFetchFunction(forecastUrl)];
+                case 2:
+                    forecastResponse = _a.sent();
+                    if (typeof forecastResponse === 'string') {
+                        return [2 /*return*/, forecastResponse];
+                    }
+                    forecast = forecastResponse;
+                    forecastToday = forecast.list[0];
+                    city = forecast.city.name;
+                    temperatureMin = forecastToday.main.temp_min;
+                    temperatureMax = forecastToday.main.temp_max;
+                    windSpeed = forecastToday.wind.speed;
+                    pressure = forecastToday.main.pressure;
+                    humidity = forecastToday.main.humidity;
+                    outputForecast = new DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity);
+                    return [2 /*return*/, outputForecast];
+            }
+        });
+    });
 }
-
 module.exports.getForecast = getForecast;
 module.exports.httpFetcher = httpFetcher;
-module.exports.FetchResult = FetchResult;
 module.exports.DailyForecast = DailyForecast;

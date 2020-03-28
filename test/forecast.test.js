@@ -1,6 +1,6 @@
-const getForecast = require('../src/forecast').getForecast;
-const FetchResult = require('../src/forecast').FetchResult;
-const DailyForecast = require('../src/forecast').DailyForecast;
+const getForecast = require('../src/forecastjs').getForecast;
+const FetchResult = require('../src/forecastjs').FetchResult;
+const DailyForecast = require('../src/forecastjs').DailyForecast;
 
 test ('We send a null as a parameter to getForecast', async () => {
     let error = new TypeError('myFetchFunction is not a function');
