@@ -1,6 +1,7 @@
 // import {getForecast, DailyForecast} from '../src/forecast';
 const getForecast = require('../src/forecast').getForecast;
 const DailyForecast = require('../src/forecast').DailyForecast;
+const ErrorResponse = require('../src/forecast').ErrorResponse;
 
 test('Everything ok => we are getting DailyForecast', async () => {
     const forecast: object | string = await getForecast(allCasesFunction(correctGeo, correctForecast));
@@ -9,15 +10,15 @@ test('Everything ok => we are getting DailyForecast', async () => {
 });
 
 test('We caught an error in the first url', async () => {
-    const firstErrorString: string = 'request to first url failed, reason: getaddrinfo NOTFOUND';
-    const secondErrorString: string = 'request to first url failed, reason: getaddrinfo NOTFOUND';
+    const firstErrorString = new ErrorResponse('request to first url failed, reason: getaddrinfo NOTFOUND');
+    const secondErrorString = new ErrorResponse('request to first url failed, reason: getaddrinfo NOTFOUND');
     const forecast: object | string= await getForecast(allCasesFunction(firstErrorString, secondErrorString));
     const errorResult: string = firstErrorString;
     expect(forecast).toEqual(errorResult);
 });
 
 test('We caught an error in the second url', async () => {
-    const secondErrorString = 'request to second url failed, reason: getaddrinfo NOTFOUND';
+    const secondErrorString = new ErrorResponse('request to second url failed, reason: getaddrinfo NOTFOUND');
     const forecast = await getForecast(allCasesFunction(correctGeo, secondErrorString));
     const errorResult = secondErrorString;
     expect(forecast).toEqual(errorResult);
