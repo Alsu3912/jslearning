@@ -35,8 +35,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
-var node_fetch_1 = require("node-fetch");
+var node_fetch_1 = __importDefault(require("node-fetch"));
 var DailyForecast = /** @class */ (function () {
     function DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity) {
         this.city = city;
@@ -48,14 +51,23 @@ var DailyForecast = /** @class */ (function () {
     }
     return DailyForecast;
 }());
+exports.DailyForecast = DailyForecast;
+var ErrorResponse = /** @class */ (function () {
+    function ErrorResponse(error) {
+        this.error = error;
+    }
+    return ErrorResponse;
+}());
+exports.ErrorResponse = ErrorResponse;
 function httpFetcher(url) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             return [2 /*return*/, node_fetch_1["default"](url, undefined)
-                    .then(function (response) { return response.json(); })["catch"](function (err) { return err.message; })];
+                    .then(function (response) { return response.json(); })["catch"](function (err) { return new ErrorResponse(err); })];
         });
     });
 }
+exports.httpFetcher = httpFetcher;
 function getForecast(myFetchFunction) {
     return __awaiter(this, void 0, void 0, function () {
         var geopositionUrl, geopositionResponse, geoposition, cityID, forecastUrl, forecastResponse, forecast, forecastToday, city, temperatureMin, temperatureMax, windSpeed, pressure, humidity, outputForecast;
@@ -66,7 +78,7 @@ function getForecast(myFetchFunction) {
                     return [4 /*yield*/, myFetchFunction(geopositionUrl)];
                 case 1:
                     geopositionResponse = _a.sent();
-                    if (typeof geopositionResponse === 'string') {
+                    if (geopositionResponse instanceof ErrorResponse) {
                         return [2 /*return*/, geopositionResponse];
                     }
                     geoposition = geopositionResponse;
@@ -75,7 +87,7 @@ function getForecast(myFetchFunction) {
                     return [4 /*yield*/, myFetchFunction(forecastUrl)];
                 case 2:
                     forecastResponse = _a.sent();
-                    if (typeof forecastResponse === 'string') {
+                    if (forecastResponse instanceof ErrorResponse) {
                         return [2 /*return*/, forecastResponse];
                     }
                     forecast = forecastResponse;
@@ -92,6 +104,8 @@ function getForecast(myFetchFunction) {
         });
     });
 }
+exports.getForecast = getForecast;
 module.exports.getForecast = getForecast;
 module.exports.httpFetcher = httpFetcher;
 module.exports.DailyForecast = DailyForecast;
+//# sourceMappingURL=forecast.js.map

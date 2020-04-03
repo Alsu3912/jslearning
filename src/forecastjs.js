@@ -52,11 +52,3 @@ module.exports.getForecast = getForecast;
 module.exports.httpFetcher = httpFetcher;
 module.exports.FetchResult = FetchResult;
 module.exports.DailyForecast = DailyForecast;
-
-// fetch(`http://api2.openweathermap.org/data/2.5/forecast?id=2950159&APPID=4a810a5579889c847679509b27b543bf&units=metric`)
-//     .then(e => e.json())
-//     .then(e => console.log(e.list[0].wind))
-
-// httpFetcher(`http://api1.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`)
-
-// getForecast(httpFetcher);

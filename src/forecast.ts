@@ -33,7 +33,7 @@ interface Wind {
     readonly speed: number;
 }
 
-class DailyForecast {
+export class DailyForecast {
     public city: string;
     public temperatureMin: number;
     public temperatureMax: number;
@@ -50,26 +50,30 @@ class DailyForecast {
     }
 }
 
-type Failure = string;
-
-async function httpFetcher(url: string): Promise<any> {
-    return fetch(url, undefined)
-        .then(response => response.json())
-        .catch(err => err.message as Failure)
+export class ErrorResponse {
+    error: any;
+    constructor(error: any) {
+        this.error = error;
+    }
 }
 
+export async function httpFetcher(url: string): Promise<any> {
+    return fetch(url, undefined)
+        .then(response => response.json())
+        .catch(err => new ErrorResponse(err))
+}
 
-async function getForecast(myFetchFunction: (url: string)=>Promise<any>) {
+export async function getForecast(myFetchFunction: (url: string)=>Promise<any>) {
     const geopositionUrl: string = `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`;
     let geopositionResponse = await myFetchFunction(geopositionUrl);
-    if (typeof geopositionResponse  === 'string') {
+    if (geopositionResponse  instanceof ErrorResponse) {
         return geopositionResponse;
     }
     const geoposition: FetchResultLocation = geopositionResponse;
     let cityID: number = geoposition.location.geoname_id;
     const forecastUrl: string = `http://api.openweathermap.org/data/2.5/forecast?id=${cityID}&APPID=4a810a5579889c847679509b27b543bf&units=metric`;
     let forecastResponse = await myFetchFunction(forecastUrl);
-    if (typeof forecastResponse === 'string') {
+    if (forecastResponse instanceof ErrorResponse) {
         return forecastResponse;
     }
     let forecast: FetchResultWeather = forecastResponse;

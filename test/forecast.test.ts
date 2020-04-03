@@ -17,9 +17,9 @@ test('We caught an error in the first url', async () => {
 });
 
 test('We caught an error in the second url', async () => {
-    const secondErrorString: string = 'request to second url failed, reason: getaddrinfo NOTFOUND';
-    const forecast: object | string = await getForecast(allCasesFunction(correctGeo, secondErrorString));
-    const errorResult: string = secondErrorString;
+    const secondErrorString = 'request to second url failed, reason: getaddrinfo NOTFOUND';
+    const forecast = await getForecast(allCasesFunction(correctGeo, secondErrorString));
+    const errorResult = secondErrorString;
     expect(forecast).toEqual(errorResult);
 });
 
