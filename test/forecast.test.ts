@@ -1,4 +1,3 @@
-// import {getForecast, DailyForecast} from '../src/forecast';
 const getForecast = require('../src/forecast').getForecast;
 const DailyForecast = require('../src/forecast').DailyForecast;
 const ErrorResponse = require('../src/forecast').ErrorResponse;
