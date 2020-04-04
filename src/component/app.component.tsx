@@ -4,10 +4,6 @@ import { DailyForecast } from "../forecast";
 import { ErrorResponse } from "../forecast"
 
 
-interface ForecastProps {
-    state: State
-};
-
 interface State {
     loaded: boolean;
     result?: DailyForecast;
