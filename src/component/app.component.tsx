@@ -29,7 +29,7 @@ interface RefreshProps {
     loading: () => void;
 } 
 
-class WeatherForecastPage extends Component<{}, State> {
+export class WeatherForecastPage extends Component<{}, State> {
     constructor(props: ForecastProps) {
         super(props);
         this.state = { loaded: true, result: { city: '...', temperatureMin: 0, temperatureMax: 0, windSpeed: 0, pressure: 0, humidity: 0 } };
@@ -125,5 +125,3 @@ class Refresh extends Component<RefreshProps> {
         return <button className="btn" onClick={this.handleClick}>Refresh</button>
     }
 }
-
-export default WeatherForecastPage;

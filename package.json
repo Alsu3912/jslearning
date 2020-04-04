@@ -7,8 +7,10 @@
     "test": "test"
   },
   "scripts": {
+    "clean" : "rm -rf ./dist",
     "test": "jest",
-    "build": "jest & webpack",
+    "compile-typescript": "tsc",
+    "build": "tsc & jest & webpack",
     "dev": "webpack-dev-server",
     "start": "webpack"
   },

@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'; 
-
 interface FetchResultLocation {
     readonly location: Location;
 }
@@ -58,7 +56,7 @@ export class ErrorResponse {
 }
 
 export async function httpFetcher(url: string): Promise<any> {
-    return fetch(url, undefined)
+    return fetch(url)
         .then(response => response.json())
         .catch(err => new ErrorResponse(err))
 }
