@@ -3,16 +3,16 @@ const DailyForecast = require('../src/forecast').DailyForecast;
 const ErrorResponse = require('../src/forecast').ErrorResponse;
 
 test('Everything ok => we are getting DailyForecast', async () => {
-    const forecast: object | string = await getForecast(allCasesFunction(correctGeo, correctForecast));
-    const correctResult: object = new DailyForecast("Halle", 3.75, 4.11, 3.42, 1033, 89);
+    const forecast = await getForecast(allCasesFunction(correctGeo, correctForecast));
+    const correctResult = new DailyForecast("Halle", 3.75, 4.11, 3.42, 1033, 89);
     expect(forecast).toEqual(correctResult);
 });
 
 test('We caught an error in the first url', async () => {
     const firstErrorString = new ErrorResponse('request to first url failed, reason: getaddrinfo NOTFOUND');
     const secondErrorString = new ErrorResponse('request to first url failed, reason: getaddrinfo NOTFOUND');
-    const forecast: object | string= await getForecast(allCasesFunction(firstErrorString, secondErrorString));
-    const errorResult: string = firstErrorString;
+    const forecast = await getForecast(allCasesFunction(firstErrorString, secondErrorString));
+    const errorResult = firstErrorString;
     expect(forecast).toEqual(errorResult);
 });
 
@@ -94,16 +94,16 @@ const correctForecast = {
             sys: { pod: 'n' },
             dt_txt: '2020-01-05 21:00:00'
         }],
-        city: {
-            id: 2911522,
-            name: "Halle",
-            coord: {
-                lat: 51.5,
-                lon: 12
-            },
-            country: "DE",
-            timezone: 3600,
-            sunrise: 1580539882,
-            sunset: 1580572770
-        }
+    city: {
+        id: 2911522,
+        name: "Halle",
+        coord: {
+            lat: 51.5,
+            lon: 12
+        },
+        country: "DE",
+        timezone: 3600,
+        sunrise: 1580539882,
+        sunset: 1580572770
+    }
 };

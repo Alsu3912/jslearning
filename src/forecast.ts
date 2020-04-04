@@ -61,28 +61,28 @@ export async function httpFetcher(url: string): Promise<any> {
         .catch(err => new ErrorResponse(err))
 }
 
-export async function getForecast(myFetchFunction: (url: string)=>Promise<any>) {
-    const geopositionUrl: string = `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`;
+export async function getForecast(myFetchFunction: (url: string) => Promise<any>) {
+    const geopositionUrl = `http://api.ipstack.com/check?access_key=289f00517cb7a7e8ad80d73f48ad0901`;
     let geopositionResponse = await myFetchFunction(geopositionUrl);
-    if (geopositionResponse  instanceof ErrorResponse) {
+    if (geopositionResponse instanceof ErrorResponse) {
         return geopositionResponse;
     }
     const geoposition: FetchResultLocation = geopositionResponse;
-    let cityID: number = geoposition.location.geoname_id;
-    const forecastUrl: string = `http://api.openweathermap.org/data/2.5/forecast?id=${cityID}&APPID=4a810a5579889c847679509b27b543bf&units=metric`;
+    let cityID = geoposition.location.geoname_id;
+    const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityID}&APPID=4a810a5579889c847679509b27b543bf&units=metric`;
     let forecastResponse = await myFetchFunction(forecastUrl);
     if (forecastResponse instanceof ErrorResponse) {
         return forecastResponse;
     }
     let forecast: FetchResultWeather = forecastResponse;
-    let forecastToday: ListWeather = forecast.list[0];
-    let city: string = forecast.city.name;
-    let temperatureMin: number = forecastToday.main.temp_min;
-    let temperatureMax: number = forecastToday.main.temp_max;
-    let windSpeed: number = forecastToday.wind.speed;
-    let pressure: number = forecastToday.main.pressure;
-    let humidity: number = forecastToday.main.humidity;
-    let outputForecast: DailyForecast = new DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity);
+    let forecastToday = forecast.list[0];
+    let city = forecast.city.name;
+    let temperatureMin = forecastToday.main.temp_min;
+    let temperatureMax = forecastToday.main.temp_max;
+    let windSpeed = forecastToday.wind.speed;
+    let pressure = forecastToday.main.pressure;
+    let humidity = forecastToday.main.humidity;
+    let outputForecast = new DailyForecast(city, temperatureMin, temperatureMax, windSpeed, pressure, humidity);
     return outputForecast;
 }
 

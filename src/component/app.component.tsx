@@ -3,11 +3,6 @@ import { getForecast, httpFetcher } from "../forecast";
 import { DailyForecast } from "../forecast";
 import { ErrorResponse } from "../forecast"
 
-
-interface ForecastProps {
-    state: State
-};
-
 interface State {
     loaded: boolean;
     result?: DailyForecast;
@@ -27,35 +22,39 @@ interface WeatherProps {
 
 interface RefreshProps {
     loading: () => void;
-} 
+}
 
 export class WeatherForecastPage extends Component<{}, State> {
-    constructor(props: ForecastProps) {
-        super(props);
-        this.state = { loaded: true, result: { city: '...', temperatureMin: 0, temperatureMax: 0, windSpeed: 0, pressure: 0, humidity: 0 } };
-        this.forecastLoader = this.forecastLoader.bind(this);
+
+    defaultState: State = {
+        loaded: true,
+        result: { city: '...', temperatureMin: 0, temperatureMax: 0, windSpeed: 0, pressure: 0, humidity: 0 }
     }
 
-    componentDidMount?(): void {
+    state = this.defaultState;
+
+    componentDidMount(): void {
+        this.forecastLoader = this.forecastLoader.bind(this);
+
         getForecast(httpFetcher)
             .then(response => {
                 if (response instanceof ErrorResponse) {
-                    this.setState({ loaded: true, error: response});
+                    this.setState({ loaded: true, error: response });
                 } else if (response instanceof DailyForecast) {
-                    this.setState({ loaded: true, result: response});
+                    this.setState({ loaded: true, result: response });
                 }
             })
     }
 
     forecastLoader(): void {
-        this.setState({ loaded: false, result: { city: '...', temperatureMin: 0, temperatureMax: 0, windSpeed: 0, pressure: 0, humidity: 0 } });
+        this.setState(this.defaultState);
         setTimeout((): void => {
             getForecast(httpFetcher)
                 .then(response => {
                     if (response instanceof ErrorResponse) {
-                        this.setState({ loaded: true, error: response});
+                        this.setState({ loaded: true, error: response });
                     } else if (response instanceof DailyForecast) {
-                        this.setState({ loaded: true, result: response});
+                        this.setState({ loaded: true, result: response });
                     }
                 })
         }, 1000)
@@ -67,8 +66,8 @@ export class WeatherForecastPage extends Component<{}, State> {
             <Header result={this.state.result.city} />
             <CircularG error={this.state.error} result={this.state.result} loaded={this.state.loaded} />
             <div className="main">
-                <Weather type="temperatureMin" text="Temeperature minimum" scale="°C" result={this.state.result.temperatureMin} />
-                <Weather type="temperatureMax" text="Temeperature maximum" scale="°C" result={this.state.result.temperatureMax} />
+                <Weather type="temperatureMin" text="Temperature minimum" scale="°C" result={this.state.result.temperatureMin} />
+                <Weather type="temperatureMax" text="Temperature maximum" scale="°C" result={this.state.result.temperatureMax} />
                 <Weather type="windSpeed" text="Wind speed" scale="m/s" result={this.state.result.windSpeed} />
                 <Weather type="pressure" text="Pressure" scale="hPa" result={this.state.result.pressure} />
                 <Weather type="humidity" text="humidity" scale="%" result={this.state.result.humidity} />
@@ -109,7 +108,7 @@ const Weather = (props: WeatherProps) => <div className="col">
     <p>{props.text}</p>
     <p className="inline">{props.result}</p>
     <p>{props.scale}</p>
-    </div>
+</div>
 
 class Refresh extends Component<RefreshProps> {
     constructor(props: RefreshProps) {
